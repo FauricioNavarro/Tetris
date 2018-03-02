@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.fauricio.tetris.MainActivity">
+
+
+    <GridLayout
+        android:id="@+id/tablero_gui"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnCount="12"
+        android:rowCount="22">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/gray"/>
+    </GridLayout>
+
+
+
+</LinearLayout>
