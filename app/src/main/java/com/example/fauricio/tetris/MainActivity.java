@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         }.start();
         */
 
-        //gridView.setAdapter(new ImageAdapter(this));
+        gridView.setAdapter(new ImageAdapter(this));
     }
 
 
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
             ImageView imageView;
             if (convertView == null) {
                 imageView = new ImageView(context);
-                imageView.setLayoutParams(new GridView.LayoutParams(45, 45));
+                imageView.setLayoutParams(new GridView.LayoutParams(36, 36));
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 imageView.setPadding(1, 1, 1, 1);
             } else {
