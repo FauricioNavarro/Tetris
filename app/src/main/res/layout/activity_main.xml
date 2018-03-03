@@ -8,19 +8,14 @@
     tools:context="com.example.fauricio.tetris.MainActivity">
 
 
-    <GridLayout
+    <GridView
         android:id="@+id/tablero_gui"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:columnCount="12"
-        android:rowCount="22">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/gray"/>
-    </GridLayout>
-
+        android:layout_width="280dp"
+        android:layout_height="500dp"
+        android:layout_below="@+id/button1"
+        android:layout_centerHorizontal="true"
+        android:numColumns="12">
+    </GridView>
 
 
 </LinearLayout>
