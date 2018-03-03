@@ -2,8 +2,10 @@ package com.example.fauricio.tetris;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,9 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private GridView gridView;
+    public int counter=1;
+    public int f =1;
+    //public int limite =
 
     public static Integer[] imageIDs = new Integer[264];
 
@@ -39,10 +44,49 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-        gridView.setAdapter(new ImageAdapter(this));
+        /*
+        new CountDownTimer(900000000, 21000){
+            public void onTick(long millisUntilFinished){
+                new CountDownTimer(21000, 1000){
+                    public void onTick(long millisUntilFinished){
+                        imageIDs[(12*counter)+f]=R.drawable.blue;
+                        gridView.setAdapter(new ImageAdapter(getApplicationContext()));
+                        counter++;
+                    }
+                    public void onFinish(){
+                        Log.i("TIMER","finish");
+                        counter=1;
+                        f++;
+                    }
+                }.start();
+            }
+            public void onFinish(){
+                Log.i("TIMER","finish");
+                f=1;
+            }
+        }.start();
+
+
+
+
+        new CountDownTimer(21000, 1000){
+            public void onTick(long millisUntilFinished){
+                imageIDs[(12*counter)+f]=R.drawable.blue;
+                gridView.setAdapter(new ImageAdapter(getApplicationContext()));
+                counter++;
+            }
+            public void onFinish(){
+                Log.i("TIMER","finish");
+                counter=1;
+                f++;
+            }
+        }.start();
+        */
+
+        //gridView.setAdapter(new ImageAdapter(this));
     }
 
-    
+
     public class ImageAdapter extends BaseAdapter
     {
 
