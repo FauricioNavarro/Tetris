@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private GridView gridView;
     public int counter=1;
     public int f =1;
-    //public int limite =
+    public int limite = 0;
 
     public static Integer[] imageIDs = new Integer[264];
 
@@ -44,8 +44,9 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-        /*
-        new CountDownTimer(900000000, 21000){
+
+        CountDownTimer timer_general = new CountDownTimer(900000000, 21000){
+
             public void onTick(long millisUntilFinished){
                 new CountDownTimer(21000, 1000){
                     public void onTick(long millisUntilFinished){
@@ -63,12 +64,13 @@ public class MainActivity extends AppCompatActivity {
             public void onFinish(){
                 Log.i("TIMER","finish");
                 f=1;
+                limite++;
             }
         }.start();
 
 
 
-
+        /*
         new CountDownTimer(21000, 1000){
             public void onTick(long millisUntilFinished){
                 imageIDs[(12*counter)+f]=R.drawable.blue;
@@ -83,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         }.start();
         */
 
-        gridView.setAdapter(new ImageAdapter(this));
+        //gridView.setAdapter(new ImageAdapter(this));
     }
 
 
