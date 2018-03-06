@@ -20,7 +20,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="440dp"
+        android:layout_height="400dp"
         android:layout_toRightOf="@+id/tablero_gui"
         android:orientation="vertical">
 

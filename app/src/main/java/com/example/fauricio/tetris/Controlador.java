@@ -10,6 +10,7 @@ class Controlador {
     public static Integer[] imageIDs = new Integer[264];
     private int[] piezas = {1,2,3,4,5,6,7,8};
     private String[] colores = {"negro","gris","azul","verde","morado","rosado","rojo","amarillo"};
+
     static Controlador getInstance() {
         return ourInstance;
     }
@@ -39,6 +40,14 @@ class Controlador {
                     tablero[x-1][y] = 0;
                     tablero[x][y] =  2;
                 }
+
+            }
+        }
+    }
+
+    public void actualiza_tablero(){
+        for(int i=0;i<22;i++){
+            for(int j=0;j<12;j++){
 
             }
         }

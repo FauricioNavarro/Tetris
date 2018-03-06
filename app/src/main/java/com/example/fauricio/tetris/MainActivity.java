@@ -38,13 +38,18 @@ public class MainActivity extends AppCompatActivity {
         int base= 12;
         for(int i=0;i<22;i++){
             for(int j=0;j<12;j++){
-                if(j==0||j==11){
+                if(controlador.tablero[i][j]==-1){
+                    controlador.imageIDs[(base*i)+j] = R.drawable.gray;
+                }else{
+                    controlador.imageIDs[(base*i)+j] = R.drawable.black;
+                }
+                /*if(j==0||j==11){
                     controlador.imageIDs[(base*i)+j] = R.drawable.gray;
                 }else if(i==0 || i==21){
                     controlador.imageIDs[(base*i)+j] = R.drawable.gray;
                 }else{
                     controlador.imageIDs[(base*i)+j] = R.drawable.black;
-                }
+                }*/
             }
         }
 
@@ -75,31 +80,7 @@ public class MainActivity extends AppCompatActivity {
                 }.start();
             }
         }.run();
-
-
-
-
-
-
-
-        /*
-        new CountDownTimer(21000, 1000){
-            public void onTick(long millisUntilFinished){
-                imageIDs[(12*counter)+f]=R.drawable.blue;
-                gridView.setAdapter(new ImageAdapter(getApplicationContext()));
-                counter++;
-            }
-            public void onFinish(){
-                Log.i("TIMER","finish");
-                counter=1;
-                f++;
-            }
-        }.start();
-        */
-
-        //gridView.setAdapter(new ImageAdapter(this));
     }
-
 
     public class ImageAdapter extends BaseAdapter
     {
