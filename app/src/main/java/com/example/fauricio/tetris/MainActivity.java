@@ -24,49 +24,61 @@ public class MainActivity extends AppCompatActivity {
     public int counter=1;
     public int f =1;
     public int limite = 0;
+    public Controlador controlador;
+    public static boolean estado=true;
 
-    public static Integer[] imageIDs = new Integer[264];
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         gridView = findViewById(R.id.tablero_gui);
+        controlador = Controlador.getInstance();
         int base= 12;
         for(int i=0;i<22;i++){
             for(int j=0;j<12;j++){
                 if(j==0||j==11){
-                    imageIDs[(base*i)+j] = R.drawable.gray;
+                    controlador.imageIDs[(base*i)+j] = R.drawable.gray;
                 }else if(i==0 || i==21){
-                    imageIDs[(base*i)+j] = R.drawable.gray;
+                    controlador.imageIDs[(base*i)+j] = R.drawable.gray;
                 }else{
-                    imageIDs[(base*i)+j] = R.drawable.black;
+                    controlador.imageIDs[(base*i)+j] = R.drawable.black;
                 }
             }
         }
 
-        CountDownTimer timer_general = new CountDownTimer(900000000, 21000){
-
-            public void onTick(long millisUntilFinished){
-                new CountDownTimer(21000, 1000){
+        new Runnable() {
+            @Override
+            public void run() {
+                CountDownTimer timer_aux = new CountDownTimer(42000, 2000){
                     public void onTick(long millisUntilFinished){
-                        imageIDs[(12*counter)+f]=R.drawable.blue;
-                        gridView.setAdapter(new ImageAdapter(getApplicationContext()));
-                        counter++;
+                        if(counter==1){
+                            controlador.imageIDs[(12*counter)+f]=R.drawable.blue;
+                            gridView.setAdapter(new ImageAdapter(getApplicationContext()));
+                            counter++;
+                        }else{
+                            controlador.imageIDs[(12*(counter-1))+f]=R.drawable.black;
+                            gridView.setAdapter(new ImageAdapter(getApplicationContext()));
+                            controlador.imageIDs[(12*counter)+f]=R.drawable.blue;
+                            gridView.setAdapter(new ImageAdapter(getApplicationContext()));
+                            counter++;
+                        }
                     }
                     public void onFinish(){
                         Log.i("TIMER","finish");
                         counter=1;
                         f++;
+                        estado=false;
+                        onStop();
                     }
                 }.start();
             }
-            public void onFinish(){
-                Log.i("TIMER","finish");
-                f=1;
-                limite++;
-            }
-        }.start();
+        }.run();
+
+
+
+
 
 
 
@@ -101,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
 
         //---returns the number of images---
         public int getCount() {
-            return imageIDs.length;
+            return controlador.imageIDs.length;
         }
 
         //---returns the ID of an item---
@@ -125,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 imageView = (ImageView) convertView;
             }
-            imageView.setImageResource(imageIDs[position]);
+            imageView.setImageResource(controlador.imageIDs[position]);
             return imageView;
         }
     }
