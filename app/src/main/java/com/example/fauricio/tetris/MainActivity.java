@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     public int limite = 0;
     public Controlador controlador;
     public static boolean estado=true;
+    public int[][] prueba= {{},{},{}};
 
 
 
@@ -43,13 +44,6 @@ public class MainActivity extends AppCompatActivity {
                 }else{
                     controlador.imageIDs[(base*i)+j] = R.drawable.black;
                 }
-                /*if(j==0||j==11){
-                    controlador.imageIDs[(base*i)+j] = R.drawable.gray;
-                }else if(i==0 || i==21){
-                    controlador.imageIDs[(base*i)+j] = R.drawable.gray;
-                }else{
-                    controlador.imageIDs[(base*i)+j] = R.drawable.black;
-                }*/
             }
         }
 

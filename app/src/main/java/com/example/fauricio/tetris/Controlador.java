@@ -40,8 +40,8 @@ class Controlador {
                     tablero[x-1][y] = 0;
                     tablero[x][y] =  2;
                 }
-
             }
+
         }
     }
 
