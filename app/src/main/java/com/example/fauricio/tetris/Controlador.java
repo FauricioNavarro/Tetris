@@ -10,6 +10,12 @@ class Controlador {
     public static Integer[] imageIDs = new Integer[264];
     private int[] piezas = {1,2,3,4,5,6,7,8};
     private String[] colores = {"negro","gris","azul","verde","morado","rosado","rojo","amarillo"};
+    private static final int[][][] matriz_eje_x = {
+            {{0,-1,-1,-2}}
+    };
+    private static final int[][][] matriz_eje_y = {
+            {{0,0,1,1}}
+    };
 
     static Controlador getInstance() {
         return ourInstance;
@@ -30,18 +36,33 @@ class Controlador {
         }
     }
 
-    public void baja_pieza(int x,int y,int tipoPieza,int aux){
-        int y1 = y+1;
+    public void baja_pieza(int x,int y,int tipoPieza){
+        int x1,x2,x3,y1,y2,y3;
         switch (tipoPieza){
-            case 0:{//Cuadrado pequeño
-                if(aux == 1){
-                    tablero[x][y] =  2;
+            case 0:{//Cuadrado
+                x1 = matriz_eje_x[0][0][1] + x;
+                x2 = matriz_eje_x[0][0][2] + x;
+                x3 = matriz_eje_x[0][0][3] + x;
+                y1 = matriz_eje_y[0][0][1] + y;
+                y2 = matriz_eje_y[0][0][2] + y;
+                y3 = matriz_eje_y[0][0][3] + y;
+                if(tablero[x3-1][y3]==-1) {
+                    imageIDs[(12 * x) + y] = R.drawable.red;
+                    imageIDs[(12 * x) + (y + 1)] = R.drawable.black;
+                    imageIDs[(12 * x1) + y1] = R.drawable.red;
+                    imageIDs[(12 * (x1 - 1)) + y1] = R.drawable.black;
+                    imageIDs[(12 * x2) + y2] = R.drawable.red;
+                    imageIDs[(12 * x3) + y3] = R.drawable.red;
                 }else{
-                    tablero[x-1][y] = 0;
-                    tablero[x][y] =  2;
+                    imageIDs[(12 * x) + y] = R.drawable.red;
+                    imageIDs[(12 * x) + (y + 1)] = R.drawable.black;
+                    imageIDs[(12 * x1) + y1] = R.drawable.red;
+                    imageIDs[(12 * (x1 - 1)) + y1] = R.drawable.black;
+                    imageIDs[(12 * x2) + y2] = R.drawable.red;
+                    imageIDs[(12 * x3) + y3] = R.drawable.red;
+                    imageIDs[(12 * (x3-1) + y3)] = R.drawable.black;
                 }
             }
-
         }
     }
 

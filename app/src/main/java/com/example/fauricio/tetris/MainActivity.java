@@ -21,8 +21,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private GridView gridView;
-    public int counter=1;
-    public int f =1;
+    public int counter=3;
+    public int f =5;
     public int limite = 0;
     public Controlador controlador;
     public static boolean estado=true;
@@ -52,7 +52,16 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 CountDownTimer timer_aux = new CountDownTimer(42000, 2000){
                     public void onTick(long millisUntilFinished){
-                        if(counter==1){
+                        controlador.baja_pieza(counter,f,0);
+                        gridView.setAdapter(new ImageAdapter(getApplicationContext()));
+
+                        if(counter<20){
+                            counter++;
+                        }else{
+                            onStop();
+                        }
+                        /*if(counter==1){
+                            // f : numero de columna | counter : numro de fila
                             controlador.imageIDs[(12*counter)+f]=R.drawable.blue;
                             gridView.setAdapter(new ImageAdapter(getApplicationContext()));
                             counter++;
@@ -62,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                             controlador.imageIDs[(12*counter)+f]=R.drawable.blue;
                             gridView.setAdapter(new ImageAdapter(getApplicationContext()));
                             counter++;
-                        }
+                        }*/
                     }
                     public void onFinish(){
                         Log.i("TIMER","finish");
@@ -78,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
 
     public class ImageAdapter extends BaseAdapter
     {
-
         private Context context;
 
         public ImageAdapter(Context c)
@@ -86,12 +94,10 @@ public class MainActivity extends AppCompatActivity {
             context = c;
         }
 
-        //---returns the number of images---
         public int getCount() {
             return controlador.imageIDs.length;
         }
 
-        //---returns the ID of an item---
         public Object getItem(int position) {
             return position;
         }
@@ -100,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
             return position;
         }
 
-        //---returns an ImageView view---
         public View getView(int position, View convertView, ViewGroup parent)
         {
             ImageView imageView;
