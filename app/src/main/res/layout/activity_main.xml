@@ -49,17 +49,20 @@
         <ImageView
             android:layout_width="90dp"
             android:layout_height="match_parent"
-            android:src="@drawable/arrow_left"/>
+            android:src="@drawable/arrow_left"
+            android:onClick="left_click"/>
 
         <ImageView
             android:layout_width="90dp"
             android:layout_height="match_parent"
-            android:src="@drawable/arrow_down"/>
+            android:src="@drawable/arrow_down"
+            android:onClick="down_click"/>
 
         <ImageView
             android:layout_width="90dp"
             android:layout_height="match_parent"
-            android:src="@drawable/arrow_right"/>
+            android:src="@drawable/arrow_right"
+            android:onClick="right_click"/>
 
         <ImageView
             android:layout_width="90dp"

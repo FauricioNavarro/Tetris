@@ -21,14 +21,42 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private GridView gridView;
-    public int counter=3;
-    public int f =5;
-    public int limite = 0;
+    public int eje_y = 2;
+    public int eje_x = 5;
+    public int aux;
     public Controlador controlador;
     public static boolean estado=true;
     public int[][] prueba= {{},{},{}};
 
+    public void left_click(View view){
+        aux = eje_x-1;
+        if(aux>0 && aux<11){
+            eje_x = eje_x - 1;
+            controlador.baja_pieza(eje_y,eje_x,0,6);
+            controlador.actualiza_tablero();
+            gridView.setAdapter(new ImageAdapter(getApplicationContext()));
+        }
+    }
 
+    public void right_click(View view){
+        aux = eje_x+1;
+        if(aux>0 && aux<11){
+            eje_x = eje_x + 1;
+            controlador.baja_pieza(eje_y,eje_x,0,6);
+            controlador.actualiza_tablero();
+            gridView.setAdapter(new ImageAdapter(getApplicationContext()));
+        }
+    }
+
+    public void down_click(View view){
+        aux = eje_y + 1;
+        if(aux > 0 && aux < 21){
+            eje_y = eje_y + 1;
+            controlador.baja_pieza(eje_y,eje_x,0,6);
+            controlador.actualiza_tablero();
+            gridView.setAdapter(new ImageAdapter(getApplicationContext()));
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         gridView = findViewById(R.id.tablero_gui);
         controlador = Controlador.getInstance();
+        /*
         int base= 12;
         for(int i=0;i<22;i++){
             for(int j=0;j<12;j++){
@@ -46,13 +75,16 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-
+        */
+        controlador.actualiza_tablero();
+        gridView.setAdapter(new ImageAdapter(getApplicationContext()));
+        /*
         new Runnable() {
             @Override
             public void run() {
                 CountDownTimer timer_aux = new CountDownTimer(42000, 2000){
                     public void onTick(long millisUntilFinished){
-                        controlador.baja_pieza(counter,f,0);
+                        controlador.baja_pieza(counter,f,0,6);
                         gridView.setAdapter(new ImageAdapter(getApplicationContext()));
 
                         if(counter<20){
@@ -72,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
                             gridView.setAdapter(new ImageAdapter(getApplicationContext()));
                             counter++;
                         }*/
+        /*
                     }
                     public void onFinish(){
                         Log.i("TIMER","finish");
@@ -83,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
                 }.start();
             }
         }.run();
+        */
     }
 
     public class ImageAdapter extends BaseAdapter
