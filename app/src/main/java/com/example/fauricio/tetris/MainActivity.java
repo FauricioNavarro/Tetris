@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         aux = eje_x-1;
         if(aux>0 && aux<11){
             eje_x = eje_x - 1;
-            controlador.baja_pieza(eje_y,eje_x,0,6);
+            controlador.mover_izq(eje_y,eje_x,0,6);
             controlador.actualiza_tablero();
             gridView.setAdapter(new ImageAdapter(getApplicationContext()));
         }
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         aux = eje_x+1;
         if(aux>0 && aux<11){
             eje_x = eje_x + 1;
-            controlador.baja_pieza(eje_y,eje_x,0,6);
+            controlador.mover_der(eje_y,eje_x,0,6);
             controlador.actualiza_tablero();
             gridView.setAdapter(new ImageAdapter(getApplicationContext()));
         }
