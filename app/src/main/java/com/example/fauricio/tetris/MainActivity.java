@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private GridView gridView;
     public int eje_y = 2;
     public int eje_x = 5;
+    public int rotate;
     public int aux;
     public Controlador controlador;
     public static boolean estado=true;
@@ -58,24 +59,27 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void rotate_click(View view){
+        /*
+        aux = rotate + 1;
+
+        if(aux > 4){
+            rotate = 0;
+        }else{
+            rotate = rotate + 1;
+            controlador.rotar_pieza(eje_y,eje_x,0,6,rotate);
+            controlador.actualiza_tablero();
+            gridView.setAdapter(new ImageAdapter(getApplicationContext()));
+        } */
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         gridView = findViewById(R.id.tablero_gui);
         controlador = Controlador.getInstance();
-        /*
-        int base= 12;
-        for(int i=0;i<22;i++){
-            for(int j=0;j<12;j++){
-                if(controlador.tablero[i][j]==-1){
-                    controlador.imageIDs[(base*i)+j] = R.drawable.gray;
-                }else{
-                    controlador.imageIDs[(base*i)+j] = R.drawable.black;
-                }
-            }
-        }
-        */
+
         controlador.actualiza_tablero();
         gridView.setAdapter(new ImageAdapter(getApplicationContext()));
         /*
@@ -122,24 +126,19 @@ public class MainActivity extends AppCompatActivity {
     public class ImageAdapter extends BaseAdapter
     {
         private Context context;
-
         public ImageAdapter(Context c)
         {
             context = c;
         }
-
         public int getCount() {
             return controlador.imageIDs.length;
         }
-
         public Object getItem(int position) {
             return position;
         }
-
         public long getItemId(int position) {
             return position;
         }
-
         public View getView(int position, View convertView, ViewGroup parent)
         {
             ImageView imageView;
