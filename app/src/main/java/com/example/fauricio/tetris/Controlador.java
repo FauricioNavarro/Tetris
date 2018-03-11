@@ -10,6 +10,7 @@ class Controlador {
     private static final Controlador ourInstance = new Controlador();
     public int[][] tablero;
     public static Integer[] imageIDs = new Integer[264];
+    public static boolean estado=true;
     private static final int[][][] matriz_eje_y = {
             {{0,-1,-1,-2},{-1,-1,0,0},{0,-1,-1,-2},{-1,-1,0,0}},
             {{0,-1,-1,-2},{0,-1,-1,0},{0,-1,-1,-2},{0,-1,-1,0}},
@@ -60,13 +61,6 @@ class Controlador {
         y2 = matriz_eje_y[tipoPieza][dir][1] + y;
         y3 = matriz_eje_y[tipoPieza][dir][2] + y;
         y4 = matriz_eje_y[tipoPieza][dir][3] + y;
-        /*
-        Log.i("Cordenadas DER -> ", "x:" +Integer.toString(x1)+" / y: " + Integer.toString(y1));
-        Log.i("Cordenadas DER -> ", "x:" +Integer.toString(x2)+" / y: " + Integer.toString(y2));
-        Log.i("Cordenadas DER -> ", "x:" +Integer.toString(x3)+" / y: " + Integer.toString(y3));
-        Log.i("Cordenadas DER -> ", "x:" +Integer.toString(x4)+" / y: " + Integer.toString(y4));
-        Log.i("Cordenadas DER -> ", "-------------------------------------");
-        */
         if((x4<11 && x4>0) && (x1>0 && x1<11) && (x2>0 && x2<11) && (x3>0 && x3<11) &&
         (y4<21 && y4>0) && (y1>0 && y1<21) && (y2>0 && y2<21) && (y3>0 && y3<21)){
             borra_pieza(x1,x2,x3,x4,y1,y2,y3,y4,1,dir,2);
@@ -87,28 +81,23 @@ class Controlador {
         y2 = matriz_eje_y[tipoPieza][dir][1] + y;
         y3 = matriz_eje_y[tipoPieza][dir][2] + y;
         y4 = matriz_eje_y[tipoPieza][dir][3] + y;
-        /*
-        Log.i("Cordenadas IZQ -> ", "x:" +Integer.toString(x1)+" / y: " + Integer.toString(y1));
-        Log.i("Cordenadas IZQ -> ", "x:" +Integer.toString(x2)+" / y: " + Integer.toString(y2));
-        Log.i("Cordenadas IZQ -> ", "x:" +Integer.toString(x3)+" / y: " + Integer.toString(y3));
-        Log.i("Cordenadas IZQ -> ", "x:" +Integer.toString(x4)+" / y: " + Integer.toString(y4));
-        Log.i("Cordenadas IZQ -> ", "-------------------------------------");
-        */
         if((x4<11 && x4>0) && (x1>0 && x1<11) && (x2>0 && x2<11) && (x3>0 && x3<11) &&
         (y4<21 && y4>0) && (y1>0 && y1<21) && (y2>0 && y2<21) && (y3>0 && y3<21)){
-            if(x3+1 > 10){
-                tablero[y1][x+1] = 0;
-                tablero[y2][x1+1] = 0;
-                tablero[y1][x2+1] = -1;
-                tablero[y2][x3+1] = -1;
-            }else{
-                borra_pieza(x1,x2,x3,x4,y1,y2,y3,y4,tipoPieza,dir,1);
+            if (x3 + 1 > 10) {
+                tablero[y1][x + 1] = 0;
+                tablero[y2][x1 + 1] = 0;
+                tablero[y1][x2 + 1] = -1;
+                tablero[y2][x3 + 1] = -1;
+            } else {
+                borra_pieza(x1, x2, x3, x4, y1, y2, y3, y4, tipoPieza, dir, 1);
             }
+
             tablero[y1][x1] = color;
             tablero[y2][x2] = color;
             tablero[y3][x3] = color;
             tablero[y4][x4] = color;
         }
+
 
     }
 
@@ -122,16 +111,8 @@ class Controlador {
         y2 = matriz_eje_y[tipoPieza][dir][1] + y;
         y3 = matriz_eje_y[tipoPieza][dir][2] + y;
         y4 = matriz_eje_y[tipoPieza][dir][3] + y;
-        /*
-        Log.d("Cordenadas -> ", "x:" +Integer.toString(x1)+" / y: " + Integer.toString(y1));
-        Log.d("Cordenadas -> ", "x:" +Integer.toString(x2)+" / y: " + Integer.toString(y2));
-        Log.d("Cordenadas -> ", "x:" +Integer.toString(x3)+" / y: " + Integer.toString(y3));
-        Log.d("Cordenadas -> ", "x:" +Integer.toString(x4)+" / y: " + Integer.toString(y4));
-        Log.d("Cordenadas -> ", "-------------------------------------");
-        */
         if((x4<11 && x4>0) && (x1>0 && x1<11) && (x2>0 && x2<11) && (x3>0 && x3<11) &&
                 (y4<21 && y4>0) && (y1>0 && y1<21) && (y2>0 && y2<21) && (y3>0 && y3<21)){
-            //if(tablero)
             if(y4-1 == 0){
                 tablero[y1-1][x1] = 0;
                 tablero[y2-1][x2] = 0;
@@ -143,9 +124,8 @@ class Controlador {
             tablero[y2][x2] = color;
             tablero[y3][x3] = color;
             tablero[y4][x4] = color;
+
         }
-
-
     }
 
     public int rotar_pieza(int y,int x,int tipoPieza,int color,int dir){

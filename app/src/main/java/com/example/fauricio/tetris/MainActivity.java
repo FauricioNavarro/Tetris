@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
     public int rotate = 0;
     public int aux;
     public Controlador controlador;
-    public static boolean estado=true;
     public int pieza_actual;
     public int color_actual;
     public final Random rand = new Random();
@@ -112,13 +111,11 @@ public class MainActivity extends AppCompatActivity {
                             controlador.actualiza_tablero();
                             gridView.setAdapter(new ImageAdapter(getApplicationContext()));
                         }else if(aux==21){
-                            estado=false;
                             Log.i("TIMER","finish: "+eje_x);
                             cancel();
                         }
                     }
                     public void onFinish(){
-                        estado=false;
                         Log.i("TIMER","finish: "+eje_x);
                     }
                 }.start();
@@ -127,11 +124,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("TIMER","finish principal");
             }
         }.start();
-
-
-
-
-
     }
 
     public class ImageAdapter extends BaseAdapter
