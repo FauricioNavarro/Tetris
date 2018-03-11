@@ -3,6 +3,7 @@ package com.example.fauricio.tetris;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,22 +19,26 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     private GridView gridView;
     public int eje_y = 2;
     public int eje_x = 5;
-    public int rotate;
+    public int rotate = 0;
     public int aux;
     public Controlador controlador;
     public static boolean estado=true;
-    public int[][] prueba= {{},{},{}};
+    public int pieza_actual;
+    public int color_actual;
+    public final Random rand = new Random();
+    public final Random rand1 = new Random();
 
     public void left_click(View view){
         aux = eje_x-1;
         if(aux>0 && aux<11){
             eje_x = eje_x - 1;
-            controlador.mover_izq(eje_y,eje_x,0,6);
+            controlador.mover_izq(eje_y,eje_x,pieza_actual,color_actual,rotate);
             controlador.actualiza_tablero();
             gridView.setAdapter(new ImageAdapter(getApplicationContext()));
         }
@@ -43,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         aux = eje_x+1;
         if(aux>0 && aux<11){
             eje_x = eje_x + 1;
-            controlador.mover_der(eje_y,eje_x,0,6);
+            controlador.mover_der(eje_y,eje_x,pieza_actual,color_actual,rotate);
             controlador.actualiza_tablero();
             gridView.setAdapter(new ImageAdapter(getApplicationContext()));
         }
@@ -53,24 +58,31 @@ public class MainActivity extends AppCompatActivity {
         aux = eje_y + 1;
         if(aux > 0 && aux < 21){
             eje_y = eje_y + 1;
-            controlador.baja_pieza(eje_y,eje_x,0,6);
+            controlador.baja_pieza(eje_y,eje_x,pieza_actual,color_actual,rotate);
             controlador.actualiza_tablero();
             gridView.setAdapter(new ImageAdapter(getApplicationContext()));
         }
     }
 
     public void rotate_click(View view){
-        /*
-        aux = rotate + 1;
-
-        if(aux > 4){
-            rotate = 0;
+        if(pieza_actual!=6 && pieza_actual!=7){
+            if(rotate == 3){
+                if(pieza_actual==3 || pieza_actual==4 || pieza_actual==5){
+                    rotate = controlador.rotar_pieza(eje_y,eje_x,pieza_actual,color_actual,rotate);
+                    controlador.actualiza_tablero();
+                    gridView.setAdapter(new ImageAdapter(getApplicationContext()));
+                    rotate = 0;
+                }
+                rotate = 0;
+            }else{
+                rotate = controlador.rotar_pieza(eje_y,eje_x,pieza_actual,color_actual,rotate);
+                controlador.actualiza_tablero();
+                gridView.setAdapter(new ImageAdapter(getApplicationContext()));
+                rotate = rotate + 1;
+            }
         }else{
-            rotate = rotate + 1;
-            controlador.rotar_pieza(eje_y,eje_x,0,6,rotate);
-            controlador.actualiza_tablero();
-            gridView.setAdapter(new ImageAdapter(getApplicationContext()));
-        } */
+            rotate = 0;
+        }
     }
 
     @Override
@@ -79,48 +91,47 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         gridView = findViewById(R.id.tablero_gui);
         controlador = Controlador.getInstance();
-
         controlador.actualiza_tablero();
         gridView.setAdapter(new ImageAdapter(getApplicationContext()));
-        /*
-        new Runnable() {
-            @Override
-            public void run() {
-                CountDownTimer timer_aux = new CountDownTimer(42000, 2000){
-                    public void onTick(long millisUntilFinished){
-                        controlador.baja_pieza(counter,f,0,6);
-                        gridView.setAdapter(new ImageAdapter(getApplicationContext()));
+        pieza_actual = rand.nextInt(8);
+        color_actual = rand1.nextInt(6)+1;
 
-                        if(counter<20){
-                            counter++;
-                        }else{
-                            onStop();
+        new CountDownTimer(330000000, 33000){
+            public void onTick(long millisUntilFinished){
+                Log.i("TIMER","Comienzo: "+eje_x);
+                eje_y = 2;
+                eje_x = 5;//counter=1;
+                pieza_actual = rand.nextInt(8);
+                color_actual = rand1.nextInt(6)+1;
+                new CountDownTimer(33000, 1500){
+                    public void onTick(long millisUntilFinished){
+                        aux = eje_y + 1;
+                        if(aux > 0 && aux < 21){
+                            eje_y = eje_y + 1;
+                            controlador.baja_pieza(eje_y,eje_x,pieza_actual,color_actual,rotate);
+                            controlador.actualiza_tablero();
+                            gridView.setAdapter(new ImageAdapter(getApplicationContext()));
+                        }else if(aux==21){
+                            estado=false;
+                            Log.i("TIMER","finish: "+eje_x);
+                            cancel();
                         }
-                        /*if(counter==1){
-                            // f : numero de columna | counter : numro de fila
-                            controlador.imageIDs[(12*counter)+f]=R.drawable.blue;
-                            gridView.setAdapter(new ImageAdapter(getApplicationContext()));
-                            counter++;
-                        }else{
-                            controlador.imageIDs[(12*(counter-1))+f]=R.drawable.black;
-                            gridView.setAdapter(new ImageAdapter(getApplicationContext()));
-                            controlador.imageIDs[(12*counter)+f]=R.drawable.blue;
-                            gridView.setAdapter(new ImageAdapter(getApplicationContext()));
-                            counter++;
-                        }*/
-        /*
                     }
                     public void onFinish(){
-                        Log.i("TIMER","finish");
-                        counter=1;
-                        f++;
                         estado=false;
-                        onStop();
+                        Log.i("TIMER","finish: "+eje_x);
                     }
                 }.start();
             }
-        }.run();
-        */
+            public void onFinish(){
+                Log.i("TIMER","finish principal");
+            }
+        }.start();
+
+
+
+
+
     }
 
     public class ImageAdapter extends BaseAdapter
